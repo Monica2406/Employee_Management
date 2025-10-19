@@ -1,4 +1,33 @@
 package com.example.emp_backend.service.impl;
 
-public class EmpServiceImpl {
+import com.example.emp_backend.Mapper.EmployeeMapper;
+import com.example.emp_backend.dto.EmployeeDto;
+import com.example.emp_backend.entity.Employee;
+import com.example.emp_backend.repository.EmployeeRepository;
+import com.example.emp_backend.service.EmployeeService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.example.emp_backend.service.EmployeeService;
+
+@Service
+public class EmpServiceImpl implements EmployeeService {
+    private final EmployeeRepository employeeRepository;
+
+    @Autowired
+    public EmpServiceImpl(EmployeeRepository employeeRepository) {
+        this.employeeRepository = employeeRepository;
+    }
+
+    @Override
+    public EmployeeDto createEmployee(EmployeeDto employeeDto) {
+        Employee employee = EmployeeMapper.mapToEmployee(employeeDto);
+        Employee savedEmployee = employeeRepository.save(employee);
+        return EmployeeMapper.mapToEmployeeDto(savedEmployee);
+    }
+
+    @Override
+    public EmployeeDto getEmployeeById(Long employeeId) {
+        return null;
+    }
+
 }
