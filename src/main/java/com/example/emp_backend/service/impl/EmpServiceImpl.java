@@ -10,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example.emp_backend.service.EmployeeService;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class EmpServiceImpl implements EmployeeService {
     private final EmployeeRepository employeeRepository;
@@ -31,8 +34,15 @@ public class EmpServiceImpl implements EmployeeService {
         Employee employee = employeeRepository.findById(employeeId)
                 .orElseThrow(() ->
                         new ResourceNotFooundException("Employee is not exist with given id : "+employeeId));
-
         return EmployeeMapper.mapToEmployeeDto(employee);
     }
+
+    @Override
+    public List<EmployeeDto>getAllEmployees() {
+        List<Employee> employees = employeeRepository.findAll();
+        return employees.stream().map((employee) -> EmployeeMapper.mapToEmployeeDto(employee))
+                .collect(Collectors.toList());
+    }
+
 
 }
