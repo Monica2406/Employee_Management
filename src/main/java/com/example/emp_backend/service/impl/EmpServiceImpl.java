@@ -3,6 +3,7 @@ package com.example.emp_backend.service.impl;
 import com.example.emp_backend.Mapper.EmployeeMapper;
 import com.example.emp_backend.dto.EmployeeDto;
 import com.example.emp_backend.entity.Employee;
+import com.example.emp_backend.exception.ResourceNotFooundException;
 import com.example.emp_backend.repository.EmployeeRepository;
 import com.example.emp_backend.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,11 @@ public class EmpServiceImpl implements EmployeeService {
 
     @Override
     public EmployeeDto getEmployeeById(Long employeeId) {
-        return null;
+        Employee employee = employeeRepository.findById(employeeId)
+                .orElseThrow(() ->
+                        new ResourceNotFooundException("Employee is not exist with given id : "+employeeId));
+
+        return EmployeeMapper.mapToEmployeeDto(employee);
     }
 
 }
