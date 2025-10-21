@@ -14,6 +14,13 @@ const EmployeeComponent = () => {
     function handleEmail(e){
         setEmail(e.target.value);
     }
+    function saveEmployee(e){
+        e.preventDefault();
+
+        const employee = {firstName, lastName, email}
+        console.log(employee)
+    }
+    
 
     return (
     <div className='container'>
@@ -40,7 +47,7 @@ const EmployeeComponent = () => {
                             name='lastName'
                             value={lastName}
                             className='form-control'
-                            onChange={handlelastName}>
+                            onChange={handleLastName}>
                             </input>   
                         </div>
 
@@ -54,7 +61,7 @@ const EmployeeComponent = () => {
                             onChange={handleEmail}>
                             </input>   
                         </div>
-                        <button className='btn btn-success'>Submit</button>
+                        <button className='btn btn-success' onClick={saveEmployee}>Submit</button>
                     </form>
                 </div>
             </div>
