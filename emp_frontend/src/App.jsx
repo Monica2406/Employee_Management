@@ -10,10 +10,17 @@ function App() {
 
   return (
     <>
-      
+        <BrowserRouter>
         <HeaderComponent/>
-        <ListEmployeeComponent/> 
-        <FooterComponent/>    
+          <Routes>
+            {/* // http://localhost:5173 */}
+            <Route path='/' element = { <ListEmployeeComponent/>}></Route>
+            {/* // http://localhost:5173/employees */}
+            <Route path='/employees' element = { <ListEmployeeComponent/>}></Route> 
+          </Routes>
+        <FooterComponent/>
+         </BrowserRouter>
+    
       
     </>
   )
